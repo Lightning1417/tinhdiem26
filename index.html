@@ -27,7 +27,7 @@
 </head>
 <body>
 <div class="container">
-    <h2>Tính điểm xét tuyển BCA 2026<br><span style="color:#c53030;"
+    <h2>Tính điểm xét tuyển 2026<br><span style="color:#c53030;"></span></h2>
     
     <div class="section-box">
         <div class="section-title"><span class="icon-art">🎖️</span> 1. Nhập Chứng Chỉ Quốc Tế</div>
@@ -88,7 +88,7 @@ function tinhToanXetTuyen() {
     
     document.getElementById('diemPT2').innerText = scorePT2 > 0 ? scorePT2.toFixed(2) + " điểm" : "Không đủ điều kiện CC (IELTS < 5.5 / HSK < 4)";
     document.getElementById('diemPT3').innerText = scorePT3.toFixed(2) + " điểm";
-
+    
     document.getElementById('phuongThucToiUu').innerText = (scorePT2 > scorePT3) ? "Tối ưu theo: Phương thức 2 (Xét tuyển kết hợp chứng chỉ)" : (qdCC > m3 ? "Tối ưu theo: Phương thức 3 (Đã thay thế điểm chứng chỉ tốt hơn môn 3)" : "Tối ưu theo: Phương thức 3 (Điểm thi THPT gốc cao hơn)");
     document.getElementById('ketQuaDiem').innerText = Math.max(scorePT2, scorePT3).toFixed(2) + " điểm";
     document.getElementById('ketQuaBox').style.display = 'block';
