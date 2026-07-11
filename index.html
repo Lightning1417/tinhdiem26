@@ -3,7 +3,7 @@ html<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Tính Điểm Xét Tuyển Đại Học BCA 2026</title>
+    <title>Tính Điểm Xét Tuyển ĐH CA 2026</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -55,45 +55,35 @@ html<!DOCTYPE html>
 </head>
 <body>
 <div class="container">
-    <h2>TÍNH ĐIỂM XÉT TUYỂN ĐẠI HỌC BCA 2026</h2>
+    <h2>TÍNH ĐIỂM XÉT TUYỂN ĐH CA 2026</h2>
     
     <!-- Vùng Chứng Chỉ Ngoại Ngữ Lộ Diện Hoàn Toàn -->
-    <div class="section-title">1. Nhập Chứng Chỉ NN Quốc Tế</div>
-    <span class="hint-text">* Chỉ nhập loại bạn có. Nếu không có chứng chỉ, hãy để trống ô IELTS và giữ nguyên ô HSK.</span>
+    <div class="section-title">1. Nhập Chứng Chỉ Quốc Tế</div>
+    <span class="hint-text">* Chỉ nhập loại bạn có. Nếu không có, hãy để trống ô IELTS và giữ nguyên ô HSK.</span>
     
     <div class="form-group">
-        <label for="diemIELTS" style="font-weight: bold; color: #2d3748;">Điểm số IELTS:</label>
+        <label for="diemIELTS" style="font-weight: bold; color: #2d3748;">Điểm IELTS:</label>
         <input type="number" id="diemIELTS" step="0.5" min="0" max="9" placeholder="Ví dụ: 6.5" inputmode="decimal">
     </div>
-
     <div class="form-group">
-        <label for="capHSK" style="font-weight: bold; color: #2d3748;">Cấp độ HSK:</label>
+        <label for="capHSK" style="font-weight: bold; color: #2d3748;">Cấp HSK:</label>
         <select id="capHSK">
-            <option value="0">-- Không có HSK --</option>
+            <option value="0">-- Không có --</option>
             <option value="4">HSK 4</option>
             <option value="5">HSK 5</option>
             <option value="6">HSK 6</option>
         </select>
     </div>
-
-    <!-- Phần Điểm THPT -->
     <div class="section-title">2. Điểm Thi THPT (Thang 10)</div>
     <div class="form-group"><label>Điểm Môn 1:</label><input type="number" id="m1" step="0.01" min="0" max="10" placeholder="0.00" inputmode="decimal"></div>
     <div class="form-group"><label>Điểm Môn 2:</label><input type="number" id="m2" step="0.01" min="0" max="10" placeholder="0.00" inputmode="decimal"></div>
     <div class="form-group"><label>Điểm Môn 3 (Ngoại ngữ):</label><input type="number" id="m3" step="0.01" min="0" max="10" placeholder="0.00" inputmode="decimal"></div>
-
-    <!-- Phần Điểm BCA -->
     <div class="section-title">3. Điểm Thi ĐGNL BCA (Thang 100)</div>
     <div class="form-group"><label>Điểm Thi ĐGNL BCA:</label><input type="number" id="diemBCA" step="0.01" min="0" max="100" placeholder="0.00" inputmode="decimal"></div>
-
-    <!-- Phần Điểm Cộng -->
     <div class="section-title">4. Điểm Cộng Ưu Tiên & Điểm Thưởng</div>
     <div class="form-group"><label>Tổng Điểm Cộng gốc:</label><input type="number" id="diemcong" step="0.01" min="0" value="0" inputmode="decimal"></div>
-
     <button onclick="tinhToanXetTuyen()">KẾT QUẢ XÉT TUYỂN</button>
     <div id="errorBox" class="error-box"></div>
-    
-    <!-- Vùng hiển thị so sánh chi tiết -->
     <div id="ketQuaBox">
         <div class="pt-row">
             <span>Điểm Phương thức 2 (Chứng chỉ x3):</span>
@@ -110,7 +100,6 @@ html<!DOCTYPE html>
         </div>
     </div>
 </div>
-
 <script>
 function quyDoiIELTS(ielts) {
     if (ielts >= 7.5) return 10.0;
@@ -120,46 +109,35 @@ function quyDoiIELTS(ielts) {
     if (ielts >= 5.5) return 7.5;
     return 0.0; 
 }
-
 function quyDoiHSK(hskLevel) {
     if (hskLevel >= 5) return 10.0;
     if (hskLevel == 4) return 8.5;
     return 0.0;
 }
-
 function tinhDiemTongHop(tongTHPT, diemBCA, diemcong) {
     let diemQuyDoiTHPT = tongTHPT * 0.4;
     let diemQuyDoiBCA = diemBCA * 0.6 * 0.3;
     let diem_cong_xet_tuyen = (diemQuyDoiTHPT + diemQuyDoiBCA >= 22.5) ? ((30.0 - (diemQuyDoiTHPT + diemQuyDoiBCA)) / 7.5) * diemcong : diemcong;
     return diemQuyDoiTHPT + diemQuyDoiBCA + diem_cong_xet_tuyen;
 }
-
 function tinhToanXetTuyen() {
     document.getElementById('errorBox').style.display = 'none';
     document.getElementById('ketQuaBox').style.display = 'none';
-    
     let m1 = parseFloat(document.getElementById('m1').value);
     let m2 = parseFloat(document.getElementById('m2').value);
     let m3 = parseFloat(document.getElementById('m3').value);
     let diemBCA = parseFloat(document.getElementById('diemBCA').value);
     let diemcong = parseFloat(document.getElementById('diemcong').value) || 0;
     let errorBox = document.getElementById('errorBox');
-
-    // Kiểm tra tính hợp lệ dữ liệu cơ bản
     if (isNaN(diemBCA)) { errorBox.innerHTML = "<b>[!] LỖI:</b> Vui lòng nhập điểm bài thi BCA."; errorBox.style.display = 'block'; return; }
     if (diemBCA < 0 || diemBCA > 100) { errorBox.innerHTML = "<b>[!] LỖI:</b> Điểm BCA phải từ 0 đến 100."; errorBox.style.display = 'block'; return; }
     if (isNaN(m1) || isNaN(m2) || isNaN(m3)) { errorBox.innerHTML = "<b>[!] LỖI:</b> Vui lòng nhập đầy đủ điểm cả 3 môn thi THPT."; errorBox.style.display = 'block'; return; }
     if (m1 < 1.0 || m2 < 1.0 || m3 < 1.0) { errorBox.innerHTML = "<b>[!] CẢNH BÁO:</b> Thí sinh bị <b>ĐIỂM LIỆT</b> (< 1.0) ở môn thi THPT."; errorBox.style.display = 'block'; return; }
-
-    // Xử lý điểm quy đổi từ các ô nhập liệu trực tiếp
     let ieltsVal = parseFloat(document.getElementById('diemIELTS').value) || 0;
     let hskVal = parseInt(document.getElementById('capHSK').value) || 0;
-    
     let diemQuyDoiIELTS = quyDoiIELTS(ieltsVal);
     let diemQuyDoiHSK = quyDoiHSK(hskVal);
     let diemNgoaiNguQuyDoi = Math.max(diemQuyDoiIELTS, diemQuyDoiHSK);
-
-    // 1. Tính toán Phương thức 2
     let bieuDienPT2 = "Không đủ điều kiện CC (IELTS < 5.5 / HSK < 4)";
     let scorePT2 = -1;
     if (diemNgoaiNguQuyDoi > 0) {
@@ -167,17 +145,12 @@ function tinhToanXetTuyen() {
         scorePT2 = tinhDiemTongHop(tongTHPT_PT2, diemBCA, diemcong);
         bieuDienPT2 = scorePT2.toFixed(2) + " điểm";
     }
-
-    // 2. Tính toán Phương thức 3
     let diemMon3XetTuyen = (diemNgoaiNguQuyDoi > m3) ? diemNgoaiNguQuyDoi : m3;
     let tongTHPT_PT3 = m1 + m2 + diemMon3XetTuyen;
     let scorePT3 = tinhDiemTongHop(tongTHPT_PT3, diemBCA, diemcong);
     let bieuDienPT3 = scorePT3.toFixed(2) + " điểm";
-
-    // 3. Chọn phương thức tối ưu
     let diemCuoiCung = 0;
     let phuongThucText = "";
-
     if (scorePT2 > scorePT3) {
         diemCuoiCung = scorePT2;
         phuongThucText = "Tối ưu theo: Phương thức 2 (Xét tuyển kết hợp chứng chỉ)";
@@ -185,7 +158,6 @@ function tinhToanXetTuyen() {
         diemCuoiCung = scorePT3;
         phuongThucText = (diemNgoaiNguQuyDoi > m3) ? "Tối ưu theo: Phương thức 3 (Đã thay thế điểm chứng chỉ tốt hơn môn 3)" : "Tối ưu theo: Phương thức 3 (Điểm thi THPT gốc cao hơn)";
     }
-
     document.getElementById('diemPT2').innerText = bieuDienPT2;
     document.getElementById('diemPT3').innerText = bieuDienPT3;
     document.getElementById('phuongThucToiUu').innerText = phuongThucText;
