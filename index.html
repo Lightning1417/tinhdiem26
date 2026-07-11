@@ -1,167 +1,96 @@
-html<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Tính Điểm Xét Tuyển ĐH CA 2026</title>
+    <title>Tính Điểm Xét Tuyển 2026</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #f0f2f5;
-            padding: 15px;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            width: 100%;
-            max-width: 480px;
-            box-sizing: border-box;
-        }
-        h2 { text-align: center; color: #1a365d; margin-bottom: 5px; font-size: 18px; }
-        h3 { text-align: center; color: #4a5568; margin-top: 0; margin-bottom: 20px; font-size: 13px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
-        .section-title { font-weight: bold; color: #2b6cb0; margin-top: 15px; margin-bottom: 10px; font-size: 13px; text-transform: uppercase;}
-        .form-group { margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
-        label { width: 55%; font-size: 13px; color: #4a5568; }
-        input[type="number"], select {
-            width: 42%; padding: 10px; border: 1px solid #cbd5e0; border-radius: 8px; box-sizing: border-box;
-            font-size: 16px; -webkit-appearance: none; background-color: white;
-        }
-        input:focus, select:focus {
-            outline: none;
-            border-color: #3182ce;
-            box-shadow: 0 0 0 3px rgba(66,153,225,0.3);
-        }
-        button {
-            width: 100%; padding: 14px; background-color: #e53e3e; color: white; border: none; border-radius: 8px;
-            font-size: 15px; cursor: pointer; font-weight: bold; margin-top: 15px; -webkit-appearance: none;
-        }
-        button:hover { background-color: #c53030; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background-color: #f4f6f9; padding: 15px; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; box-sizing: border-box; }
+        .container { background: white; padding: 25px; border-radius: 16px; box-shadow: 0 10px 30px rgba(16, 48, 87, 0.08); width: 100%; max-width: 480px; box-sizing: border-box; border-top: 5px solid #103057; }
+        h2 { text-align: center; color: #103057; margin-top: 0; margin-bottom: 20px; font-size: 19px; font-weight: 700; text-transform: uppercase; }
+        .section-box { background: #fafafa; padding: 12px 15px; border-radius: 10px; border: 1px solid #eef0f4; margin-bottom: 15px; }
+        .section-title { font-weight: 700; color: #103057; margin-bottom: 10px; font-size: 13px; text-transform: uppercase; display: flex; align-items: center; }
+        .icon-art { font-size: 20px; margin-right: 8px; display: inline-block; vertical-align: middle; }
+        .form-group { margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
+        label { width: 55%; font-size: 13px; color: #4a5568; font-weight: 500; }
+        input, select { width: 42%; padding: 10px; border: 1px solid #cbd5e0; border-radius: 8px; box-sizing: border-box; font-size: 15px; background-color: white; }
+        input:focus, select:focus { outline: none; border-color: #103057; box-shadow: 0 0 0 3px rgba(16, 48, 87, 0.15); }
+        button { width: 100%; padding: 14px; background-color: #c53030; color: white; border: none; border-radius: 8px; font-size: 15px; cursor: pointer; font-weight: bold; margin-top: 10px; text-transform: uppercase; }
         .error-box { margin-top: 15px; padding: 12px; background-color: #fff5f5; border-left: 4px solid #e53e3e; color: #c53030; font-size: 13px; border-radius: 4px; display: none; }
-        
-        #ketQuaBox { margin-top: 20px; padding: 15px; border: 2px dashed #e53e3e; border-radius: 8px; background-color: #fff5f5; display: none; }
-        .pt-row { display: flex; justify-content: space-between; font-size: 13px; color: #4a5568; margin-bottom: 8px; padding-bottom: 5px; border-bottom: 1px dashed #cbd5e0;}
-        .final-row { text-align: center; margin-top: 12px; padding-top: 5px;}
-        #ketQuaDiem { color: #e53e3e; font-size: 34px; font-weight: 800; margin: 5px 0 0 0; }
-        .hint-text { font-size: 11px; color: #e53e3e; margin-top: -5px; margin-bottom: 8px; display: block; font-weight: 500; }
+        #ketQuaBox { margin-top: 20px; padding: 18px; border: 2px dashed #103057; border-radius: 12px; background-color: #f7fafc; display: none; }
+        .pt-row { display: flex; justify-content: space-between; font-size: 13px; color: #4a5568; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px dashed #e2e8f0; }
+        .final-row { text-align: center; margin-top: 15px; }
+        #ketQuaDiem { color: #c53030; font-size: 36px; font-weight: 900; margin: 8px 0 0 0; }
+        .hint-text { font-size: 11px; color: #718096; margin-top: -6px; margin-bottom: 8px; display: block; }
+        #phuongThucToiUu { font-size: 12px; color: #2f855a; font-weight: bold; margin-top: 5px; background: #e6fffa; padding: 6px 12px; border-radius: 8px; display: inline-block; border: 1px solid #b2f5ea; }
     </style>
 </head>
 <body>
 <div class="container">
-    <h2>TÍNH ĐIỂM XÉT TUYỂN ĐH CA 2026</h2>
+    <h2>Tính điểm xét tuyển BCA 2026<br><span style="color:#c53030;"
     
-    <!-- Vùng Chứng Chỉ Ngoại Ngữ Lộ Diện Hoàn Toàn -->
-    <div class="section-title">1. Nhập Chứng Chỉ Quốc Tế</div>
-    <span class="hint-text">* Chỉ nhập loại bạn có. Nếu không có, hãy để trống ô IELTS và giữ nguyên ô HSK.</span>
+    <div class="section-box">
+        <div class="section-title"><span class="icon-art">🎖️</span> 1. Nhập Chứng Chỉ Quốc Tế</div>
+        <span class="hint-text">* Chỉ nhập loại bạn có. Nếu không có, hãy để trống ô IELTS và giữ nguyên ô HSK.</span>
+        <div class="form-group"><label>Điểm IELTS:</label><input type="number" id="diemIELTS" step="0.5" placeholder="Ví dụ: 6.5" inputmode="decimal"></div>
+        <div class="form-group"><label>Cấp HSK:</label><select id="capHSK"><option value="0">-- Không có --</option><option value="4">HSK 4</option><option value="5">HSK 5</option><option value="6">HSK 6</option></select></div>
+    </div>
     
-    <div class="form-group">
-        <label for="diemIELTS" style="font-weight: bold; color: #2d3748;">Điểm IELTS:</label>
-        <input type="number" id="diemIELTS" step="0.5" min="0" max="9" placeholder="Ví dụ: 6.5" inputmode="decimal">
+    <div class="section-box">
+        <div class="section-title"><span class="icon-art">📝</span> 2. Điểm THPT (Thang 10)</div>
+        <div class="form-group"><label>Điểm Môn 1:</label><input type="number" id="m1" step="0.01" placeholder="0.00" inputmode="decimal"></div>
+        <div class="form-group"><label>Điểm Môn 2:</label><input type="number" id="m2" step="0.01" placeholder="0.00" inputmode="decimal"></div>
+        <div class="form-group"><label>Điểm Môn 3 (Ngoại ngữ):</label><input type="number" id="m3" step="0.01" placeholder="0.00" inputmode="decimal"></div>
     </div>
-    <div class="form-group">
-        <label for="capHSK" style="font-weight: bold; color: #2d3748;">Cấp HSK:</label>
-        <select id="capHSK">
-            <option value="0">-- Không có --</option>
-            <option value="4">HSK 4</option>
-            <option value="5">HSK 5</option>
-            <option value="6">HSK 6</option>
-        </select>
+
+    <div class="section-box">
+        <div class="section-title"><span class="icon-art">🦅</span> 3. Điểm ĐGNL BCA (Thang 100)</div>
+        <div class="form-group"><label>Điểm ĐGNL BCA:</label><input type="number" id="diemBCA" step="0.01" placeholder="0.00" inputmode="decimal"></div>
     </div>
-    <div class="section-title">2. Điểm Thi THPT (Thang 10)</div>
-    <div class="form-group"><label>Điểm Môn 1:</label><input type="number" id="m1" step="0.01" min="0" max="10" placeholder="0.00" inputmode="decimal"></div>
-    <div class="form-group"><label>Điểm Môn 2:</label><input type="number" id="m2" step="0.01" min="0" max="10" placeholder="0.00" inputmode="decimal"></div>
-    <div class="form-group"><label>Điểm Môn 3 (Ngoại ngữ):</label><input type="number" id="m3" step="0.01" min="0" max="10" placeholder="0.00" inputmode="decimal"></div>
-    <div class="section-title">3. Điểm Thi ĐGNL BCA (Thang 100)</div>
-    <div class="form-group"><label>Điểm Thi ĐGNL BCA:</label><input type="number" id="diemBCA" step="0.01" min="0" max="100" placeholder="0.00" inputmode="decimal"></div>
-    <div class="section-title">4. Điểm Cộng Ưu Tiên & Điểm Thưởng</div>
-    <div class="form-group"><label>Tổng Điểm Cộng gốc:</label><input type="number" id="diemcong" step="0.01" min="0" value="0" inputmode="decimal"></div>
+
+    <div class="section-box">
+        <div class="section-title"><span class="icon-art">➕</span> 4. Điểm Cộng Ưu Tiên & Điểm Thưởng</div>
+        <div class="form-group"><label>Tổng Điểm Cộng gốc:</label><input type="number" id="diemcong" step="0.01" value="0" inputmode="decimal"></div>
+    </div>
+
     <button onclick="tinhToanXetTuyen()">KẾT QUẢ XÉT TUYỂN</button>
     <div id="errorBox" class="error-box"></div>
+    
     <div id="ketQuaBox">
-        <div class="pt-row">
-            <span>Điểm Phương thức 2 (Chứng chỉ x3):</span>
-            <span id="diemPT2" style="font-weight: bold;">--</span>
-        </div>
-        <div class="pt-row">
-            <span>Điểm Phương thức 3 (Thay thế Môn 3):</span>
-            <span id="diemPT3" style="font-weight: bold;">--</span>
-        </div>
+        <div class="pt-row"><span>Điểm Phương thức 2 (Chứng chỉ x3):</span><span id="diemPT2" style="font-weight: bold;">--</span></div>
+        <div class="pt-row"><span>Điểm Phương thức 3 (Thay thế Môn 3):</span><span id="diemPT3" style="font-weight: bold;">--</span></div>
         <div class="final-row">
-            <div style="font-size:14px; font-weight:bold; color:#4a5568;">ĐIỂM XÉT TUYỂN CUỐI CÙNG</div>
-            <div id="phuongThucToiUu" style="font-size:12px; color:#2f855a; font-weight:bold; margin-top:3px;"></div>
+            <div style="font-size:13px; font-weight:bold; color:#4a5568; text-transform: uppercase;">ĐIỂM XÉT TUYỂN CUỐI CÙNG</div>
+            <div id="phuongThucToiUu"></div>
             <p id="ketQuaDiem">0.00 điểm</p>
         </div>
     </div>
 </div>
+
 <script>
-function quyDoiIELTS(ielts) {
-    if (ielts >= 7.5) return 10.0;
-    if (ielts >= 7.0) return 9.5;
-    if (ielts >= 6.5) return 8.5;
-    if (ielts >= 6.0) return 8.0;
-    if (ielts >= 5.5) return 7.5;
-    return 0.0; 
-}
-function quyDoiHSK(hskLevel) {
-    if (hskLevel >= 5) return 10.0;
-    if (hskLevel == 4) return 8.5;
-    return 0.0;
-}
-function tinhDiemTongHop(tongTHPT, diemBCA, diemcong) {
-    let diemQuyDoiTHPT = tongTHPT * 0.4;
-    let diemQuyDoiBCA = diemBCA * 0.6 * 0.3;
-    let diem_cong_xet_tuyen = (diemQuyDoiTHPT + diemQuyDoiBCA >= 22.5) ? ((30.0 - (diemQuyDoiTHPT + diemQuyDoiBCA)) / 7.5) * diemcong : diemcong;
-    return diemQuyDoiTHPT + diemQuyDoiBCA + diem_cong_xet_tuyen;
+function quyDoiIELTS(i) { return i>=7.5?10:i>=7?9.5:i>=6.5?8.5:i>=6?8:i>=5.5?7.5:0; }
+function quyDoiHSK(h) { return h>=5?10:h==4?8.5:0; }
+function tinhDiemTH(t, b, c) {
+    let qdTH = t * 0.4, qdB = b * 0.6 * 0.3;
+    return qdTH + qdB + ((qdTH + qdB >= 22.5) ? ((30 - (qdTH + qdB)) / 7.5) * c : c);
 }
 function tinhToanXetTuyen() {
-    document.getElementById('errorBox').style.display = 'none';
-    document.getElementById('ketQuaBox').style.display = 'none';
-    let m1 = parseFloat(document.getElementById('m1').value);
-    let m2 = parseFloat(document.getElementById('m2').value);
-    let m3 = parseFloat(document.getElementById('m3').value);
-    let diemBCA = parseFloat(document.getElementById('diemBCA').value);
-    let diemcong = parseFloat(document.getElementById('diemcong').value) || 0;
-    let errorBox = document.getElementById('errorBox');
-    if (isNaN(diemBCA)) { errorBox.innerHTML = "<b>[!] LỖI:</b> Vui lòng nhập điểm bài thi BCA."; errorBox.style.display = 'block'; return; }
-    if (diemBCA < 0 || diemBCA > 100) { errorBox.innerHTML = "<b>[!] LỖI:</b> Điểm BCA phải từ 0 đến 100."; errorBox.style.display = 'block'; return; }
-    if (isNaN(m1) || isNaN(m2) || isNaN(m3)) { errorBox.innerHTML = "<b>[!] LỖI:</b> Vui lòng nhập đầy đủ điểm cả 3 môn thi THPT."; errorBox.style.display = 'block'; return; }
-    if (m1 < 1.0 || m2 < 1.0 || m3 < 1.0) { errorBox.innerHTML = "<b>[!] CẢNH BÁO:</b> Thí sinh bị <b>ĐIỂM LIỆT</b> (< 1.0) ở môn thi THPT."; errorBox.style.display = 'block'; return; }
-    let ieltsVal = parseFloat(document.getElementById('diemIELTS').value) || 0;
-    let hskVal = parseInt(document.getElementById('capHSK').value) || 0;
-    let diemQuyDoiIELTS = quyDoiIELTS(ieltsVal);
-    let diemQuyDoiHSK = quyDoiHSK(hskVal);
-    let diemNgoaiNguQuyDoi = Math.max(diemQuyDoiIELTS, diemQuyDoiHSK);
-    let bieuDienPT2 = "Không đủ điều kiện CC (IELTS < 5.5 / HSK < 4)";
-    let scorePT2 = -1;
-    if (diemNgoaiNguQuyDoi > 0) {
-        let tongTHPT_PT2 = diemNgoaiNguQuyDoi * 3;
-        scorePT2 = tinhDiemTongHop(tongTHPT_PT2, diemBCA, diemcong);
-        bieuDienPT2 = scorePT2.toFixed(2) + " điểm";
-    }
-    let diemMon3XetTuyen = (diemNgoaiNguQuyDoi > m3) ? diemNgoaiNguQuyDoi : m3;
-    let tongTHPT_PT3 = m1 + m2 + diemMon3XetTuyen;
-    let scorePT3 = tinhDiemTongHop(tongTHPT_PT3, diemBCA, diemcong);
-    let bieuDienPT3 = scorePT3.toFixed(2) + " điểm";
-    let diemCuoiCung = 0;
-    let phuongThucText = "";
-    if (scorePT2 > scorePT3) {
-        diemCuoiCung = scorePT2;
-        phuongThucText = "Tối ưu theo: Phương thức 2 (Xét tuyển kết hợp chứng chỉ)";
-    } else {
-        diemCuoiCung = scorePT3;
-        phuongThucText = (diemNgoaiNguQuyDoi > m3) ? "Tối ưu theo: Phương thức 3 (Đã thay thế điểm chứng chỉ tốt hơn môn 3)" : "Tối ưu theo: Phương thức 3 (Điểm thi THPT gốc cao hơn)";
-    }
-    document.getElementById('diemPT2').innerText = bieuDienPT2;
-    document.getElementById('diemPT3').innerText = bieuDienPT3;
-    document.getElementById('phuongThucToiUu').innerText = phuongThucText;
-    document.getElementById('ketQuaDiem').innerText = diemCuoiCung.toFixed(2) + " điểm";
+    document.getElementById('errorBox').style.display = document.getElementById('ketQuaBox').style.display = 'none';
+    let m1 = parseFloat(document.getElementById('m1').value), m2 = parseFloat(document.getElementById('m2').value), m3 = parseFloat(document.getElementById('m3').value);
+    let bca = parseFloat(document.getElementById('diemBCA').value), cong = parseFloat(document.getElementById('diemcong').value) || 0, err = document.getElementById('errorBox');
+    
+    if (isNaN(bca) || bca < 0 || bca > 100 || isNaN(m1) || isNaN(m2) || isNaN(m3)) { err.innerHTML = "<b>[!] LỖI:</b> Vui lòng nhập đầy đủ và chính xác điểm số."; err.style.display = 'block'; return; }
+    if (m1 < 1 || m2 < 1 || m3 < 1) { err.innerHTML = "<b>[!] CẢNH BÁO:</b> Thí sinh bị <b>ĐIỂM LIỆT</b> (< 1.0) ở môn thi THPT."; err.style.display = 'block'; return; }
+    
+    let qdCC = Math.max(quyDoiIELTS(parseFloat(document.getElementById('diemIELTS').value)||0), quyDoiHSK(parseInt(document.getElementById('capHSK').value)||0));
+    let scorePT2 = qdCC > 0 ? tinhDiemTH(qdCC * 3, bca, cong) : -1;
+    let scorePT3 = tinhDiemTH(m1 + m2 + (qdCC > m3 ? qdCC : m3), bca, cong);
+    
+    document.getElementById('diemPT2').innerText = scorePT2 > 0 ? scorePT2.toFixed(2) + " điểm" : "Không đủ điều kiện CC (IELTS < 5.5 / HSK < 4)";
+    document.getElementById('diemPT3').innerText = scorePT3.toFixed(2) + " điểm";
+
+    document.getElementById('phuongThucToiUu').innerText = (scorePT2 > scorePT3) ? "Tối ưu theo: Phương thức 2 (Xét tuyển kết hợp chứng chỉ)" : (qdCC > m3 ? "Tối ưu theo: Phương thức 3 (Đã thay thế điểm chứng chỉ tốt hơn môn 3)" : "Tối ưu theo: Phương thức 3 (Điểm thi THPT gốc cao hơn)");
+    document.getElementById('ketQuaDiem').innerText = Math.max(scorePT2, scorePT3).toFixed(2) + " điểm";
     document.getElementById('ketQuaBox').style.display = 'block';
 }
 </script>
