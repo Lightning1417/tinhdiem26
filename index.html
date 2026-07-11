@@ -1,0 +1,87 @@
+html<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tính Điểm Xét Tuyển Bộ Công An 2026</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f0f2f5;
+            padding: 15px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+        }
+        h2 { text-align: center; color: #1a365d; margin-bottom: 5px; font-size: 18px; }
+        h3 { text-align: center; color: #4a5568; margin-top: 0; margin-bottom: 20px; font-size: 13px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+        .section-title { font-weight: bold; color: #2b6cb0; margin-top: 15px; margin-bottom: 10px; font-size: 13px; }
+        .form-group { margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; }
+        label { width: 55%; font-size: 13px; color: #4a5568; }
+        input[type="number"] {
+            width: 40%; padding: 10px; border: 1px solid #cbd5e0; border-radius: 8px; box-sizing: border-box;
+            font-size: 16px; /* Kích thước 16px giúp iPhone không bị tự động phóng to màn hình khi gõ */
+            -webkit-appearance: none;
+        }
+        button {
+            width: 100%; padding: 14px; background-color: #e53e3e; color: white; border: none; border-radius: 8px;
+            font-size: 15px; cursor: pointer; font-weight: bold; margin-top: 15px; -webkit-appearance: none;
+        }
+        .error-box { margin-top: 15px; padding: 12px; background-color: #fff5f5; border-left: 4px solid #e53e3e; color: #c53030; font-size: 13px; border-radius: 4px; display: none; }
+        #ketQuaBox { margin-top: 20px; padding: 15px; border: 2px dashed #e53e3e; border-radius: 8px; background-color: #fff5f5; text-align: center; display: none; }
+        #ketQuaDiem { color: #e53e3e; font-size: 32px; font-weight: 800; margin: 10px 0 0 0; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>TÍNH ĐIỂM XẾT TUYỂN ĐẠI HỌC</h2>
+    <h3>BỘ CÔNG AN NAM 2026</h3>
+    
+    <div class="section-title">NHẬP ĐIỂM 3 MÔN THI THPT (Thang 10)</div>
+    <div class="form-group"><label>Điểm Môn 1:</label><input type="number" id="m1" step="0.01" min="0" max="10" placeholder="0.00" inputmode="decimal"></div>
+    <div class="form-group"><label>Điểm Môn 2:</label><input type="number" id="m2" step="0.01" min="0" max="10" placeholder="0.00" inputmode="decimal"></div>
+    <div class="form-group"><label>Điểm Môn 3:</label><input type="number" id="m3" step="0.01" min="0" max="10" placeholder="0.00" inputmode="decimal"></div>
+
+    <div class="section-title">NHẬP ĐIỂM BÀI THI CỦA BCA (Thang 100)</div>
+    <div class="form-group"><label>Điểm bài thi BCA:</label><input type="number" id="diemBCA" step="0.01" min="0" max="100" placeholder="0.00" inputmode="decimal"></div>
+
+    <div class="section-title">NHẬP ĐIỂM CỘNG ƯU TIÊN & ĐIỂM THƯỞNG</div>
+    <div class="form-group"><label>Điểm Cộng:</label><input type="number" id="diemcong" step="0.01" min="0" value="0" inputmode="decimal"></div>
+
+    <button onclick="tinhToanXetTuyen()">XEM KẾT QUẢ XÉT TUYỂN</button>
+    <div id="errorBox" class="error-box"></div>
+    <div id="ketQuaBox"><div style="font-size:13px; font-weight:bold; color:#4a5568;">ĐIỂM XÉT TUYỂN CUỐI CÙNG</div><p id="ketQuaDiem">0.00 điểm</p></div>
+</div>
+
+<script>
+function tinhToanXetTuyen() {
+    document.getElementById('errorBox').style.display = 'none';
+    document.getElementById('ketQuaBox').style.display = 'none';
+    let m1 = parseFloat(document.getElementById('m1').value), m2 = parseFloat(document.getElementById('m2').value), m3 = parseFloat(document.getElementById('m3').value), diemBCA = parseFloat(document.getElementById('diemBCA').value), diemcong = parseFloat(document.getElementById('diemcong').value) || 0;
+    let errorBox = document.getElementById('errorBox');
+    if (isNaN(m1) || isNaN(m2) || isNaN(m3) || isNaN(diemBCA)) { errorBox.innerHTML = "<b>[!] LỖI:</b> Vui lòng nhập đủ điểm."; errorBox.style.display = 'block'; return; }
+    if (m1 < 1.0 || m2 < 1.0 || m3 < 1.0) { errorBox.innerHTML = "<b>[!] CẢNH BÁO:</b> Thí sinh bị <b>ĐIỂM LIỆT</b> (< 1.0). Không đủ điều kiện!"; errorBox.style.display = 'block'; return; }
+    if (diemBCA < 0 || diemBCA > 100) { errorBox.innerHTML = "<b>[!] LỖI:</b> Điểm BCA từ 0 đến 100."; errorBox.style.display = 'block'; return; }
+    
+    let diemQuyDoiTHPT = (m1 + m2 + m3) * 0.4;
+    let diemQuyDoiBCA = diemBCA * 0.6 * 0.3;
+    let diem_cong_xet_tuyen = (diemQuyDoiTHPT + diemQuyDoiBCA >= 22.5) ? ((30.0 - (diemQuyDoiTHPT + diemQuyDoiBCA)) / 7.5) * diemcong : diemcong;
+    
+    document.getElementById('ketQuaBox').style.display = 'block';
+    document.getElementById('ketQuaDiem').innerText = (diemQuyDoiTHPT + diemQuyDoiBCA + diem_cong_xet_tuyen).toFixed(2) + " điểm";
+}
+</script>
+</body>
+</html>
