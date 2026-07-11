@@ -38,7 +38,7 @@
     
     <div class="section-box">
         <div class="section-title"><span class="icon-art">🎖️</span> 1. Nhập Chứng Chỉ Quốc Tế</div>
-        <span class="hint-text">* Chỉ nhập loại bạn có. Nếu không có, hãy để trống ô IELTS và giữ nguyên ô HSK.</span>
+        <span class="hint-text">* Chỉ nhập loại bạn có (nếu không có, hãy để trống ô IELTS, giữ nguyên ô HSK)</span>
         <div class="form-group"><label>Điểm IELTS:</label><input type="number" id="diemIELTS" step="0.5" placeholder="Ví dụ: 6.5" inputmode="decimal"></div>
         <div class="form-group"><label>Cấp HSK:</label><select id="capHSK"><option value="0">-- Không có --</option><option value="4">HSK 4</option><option value="5">HSK 5</option><option value="6">HSK 6</option></select></div>
     </div>
@@ -96,7 +96,7 @@ function tinhToanXetTuyen() {
     document.getElementById('diemPT2').innerText = scorePT2 > 0 ? scorePT2.toFixed(2) + " điểm" : "Không đủ điều kiện CC (IELTS < 5.5 / HSK < 4)";
     document.getElementById('diemPT3').innerText = scorePT3.toFixed(2) + " điểm";
     
-    document.getElementById('phuongThucToiUu').innerText = (scorePT2 > scorePT3) ? "Tối ưu theo: Phương thức 2 (Xét tuyển kết hợp chứng chỉ)" : (qdCC > m3 ? "Tối ưu theo: Phương thức 3 (Đã thay thế điểm chứng chỉ tốt hơn môn 3)" : "Tối ưu theo: Phương thức 3 (Điểm thi THPT gốc cao hơn)");
+    document.getElementById('phuongThucToiUu').innerText = (scorePT2 > scorePT3) ? "Tối ưu: PT2 (sử dụng chứng chỉ)" : (qdCC > m3 ? "Tối ưu: PT3 (đã thay điểm chứng chỉ tốt hơn môn 3)" : "Tối ưu: PT3 (điểm môn 3 cao hơn)");
     document.getElementById('ketQuaDiem').innerText = Math.max(scorePT2, scorePT3).toFixed(2) + " điểm";
     document.getElementById('ketQuaBox').style.display = 'block';
 }
